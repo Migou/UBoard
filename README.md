@@ -34,7 +34,7 @@ git push # envoie les modifs au serveur
 
   git add src
 
-  echo '#include <stdio.h>\n printf("hello world")' >> src/test.cpp
+  echo '#include &lt;stdio.h>\n printf("hello world")' >> src/test.cpp
 
   git add test.cpp
 
