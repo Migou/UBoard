@@ -203,13 +203,14 @@ class MyEventReceiver : public IEventReceiver
 				
 				for(int i=0;i<GUIList.size();++i)
 				{
-					if(GUIList[i]->handleEvent(event))
+					if(GUIList[i]->handleGUIEvent(event))
 					{
 						break;
 					}
 				}
 
 			break;
+			
 			default:
 			break;
 		}

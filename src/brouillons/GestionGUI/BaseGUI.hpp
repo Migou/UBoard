@@ -69,7 +69,7 @@ class BaseGUI
 		@param event événement à traiter
 		@return renvoi true si l'élément faisait partie de cette GUI, false sinon
 	*/
-	virtual bool handleEvent(const SEvent& event)=0;
+	virtual bool handleGUIEvent(const SEvent& event)=0;
 	
 	/**
 		change la visibilité de la GUI
@@ -93,6 +93,21 @@ class MyGUI : public BaseGUI
 	public:
 	
 	IGUIButton* BT_quitter;		///< Bouton quitter
+	IGUIStaticText* TXT_Hello;
+	
+	
+	// Barre de Menu
+	IGUIContextMenu * menuBar;
+	
+	s32 itemIDNewProject;
+	s32 itemIDOpenProject;
+	s32 itemIDCloseProject;
+	s32 itemIDSave;
+	s32 itemIDSaveAs;
+	s32 itemIDExport;
+	s32 itemIDQuit;
+	
+	s32 itemIDProjectProperties;
 	
 	MyGUI(SAppContext _context):BaseGUI(_context)
 	{
@@ -103,25 +118,38 @@ class MyGUI : public BaseGUI
 	{
 		// Retirer les widgets de l'environnement
 		BT_quitter->remove();
+		TXT_Hello->remove();
 	}
 	
-	virtual bool handleEvent(const SEvent& event)
+	virtual bool handleGUIEvent(const SEvent& event)
 	{
-		bool found = true;
-		if(event.GUIEvent.Caller->getID() == BT_quitter->getID())
+		bool found = false;
+		
 		{
 			
 			switch(event.GUIEvent.EventType)
 			{
 				case EGET_BUTTON_CLICKED:
-					context.device->closeDevice();
+					if(event.GUIEvent.Caller->getID() == BT_quitter->getID())
+					{
+						context.device->closeDevice();
+						found = true;
+					}
+
+				break;
+				case EGET_MENU_ITEM_SELECTED :
+					IGUIContextMenu* menu = (gui::IGUIContextMenu*)event.GUIEvent.Caller;
+					s32 id = menu->getItemCommandId(menu->getSelectedItem());
+					
+					if(id==itemIDQuit)
+					{
+						context.device->closeDevice();
+						found = true;
+					}
 				break;
 			}
 		}
-		else
-		{
-			found = false;
-		}
+
 		
 		return found;
 	}
@@ -135,6 +163,39 @@ class MyGUI : public BaseGUI
 	{
 		IGUIEnvironment* guienv = this->context.device->getGUIEnvironment();
 		BT_quitter = guienv->addButton(rect<s32>(10,240,110,240 + 32), 0, useNextID(), L"Quit", L"Exits Program");
+		TXT_Hello = guienv->addStaticText(L"Hello World!", rect<s32>(210,210,460,222), true);
+		TXT_Hello->setDrawBorder(false);
+		
+		menuBar = guienv->addMenu();
+        menuBar->addItem(L"Fichier", -1, true, true);
+
+        gui::IGUIContextMenu* subMenuFile = menuBar->getSubMenu(0);
+        subMenuFile->addItem(L"Nouveau Projet", useNextID());
+		itemIDNewProject = getCurrentID();
+        subMenuFile->addItem(L"Ouvrir un Projet", useNextID());
+		itemIDOpenProject = getCurrentID();
+        subMenuFile->addItem(L"Fermer le Projet", useNextID());
+		itemIDCloseProject = getCurrentID();
+		
+        subMenuFile->addSeparator();
+		
+		subMenuFile->addItem(L"Enregistrer", useNextID());
+		itemIDSave = getCurrentID();
+        subMenuFile->addItem(L"Enregistrer Sous", useNextID());
+		itemIDSaveAs = getCurrentID();
+        subMenuFile->addItem(L"Exporter", useNextID());
+		itemIDExport = getCurrentID();
+		
+		subMenuFile->addSeparator();
+		
+        subMenuFile->addItem(L"Quitter", useNextID());
+		itemIDQuit = getCurrentID();
+		
+		menuBar->addItem(L"Projet", -1, true, true);
+
+        gui::IGUIContextMenu* subMenuProject = menuBar->getSubMenu(1);
+		subMenuProject->addItem(L"Propriétés du Projet", useNextID());
+		itemIDProjectProperties = getCurrentID();
 	}
 };
 

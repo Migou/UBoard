@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
 		}
 		
 		// Affichage de la scène
-		driver->beginScene(true, true, SColor(255,0,0,0));
+		driver->beginScene(true, true, SColor(255,127,127,127));
 
 		smgr->drawAll();
 		guienv->drawAll();
