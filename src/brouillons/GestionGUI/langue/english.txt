@@ -1,0 +1,47 @@
+1;Quit current Game ?
+2;Yes
+3;No
+4;Main Menu
+5;Options
+6;Quit ?
+7;New Game
+9;Quit
+10;Back to Main Menu
+11;First AI level :
+12;Second AI level :
+13;first AI type :
+14;AlphaBeta
+15;MiniMax
+16;FailSoft
+17;Second AI type :
+18;Animation Speed :
+19;Fast
+20;Normal
+21;Slow
+22;Player 1 :
+23;Human
+24;AI
+25;Player 2 :
+26;Text Output :
+27;ON
+28;OFF
+29;This move is not Allowed !!!
+30;pass
+31;Black
+32;White
+33;Black's turn
+34;White's turn
+35;Black :
+36;White :
+37; Black Win !!!
+38;Draw !!!
+39;White Win !!!
+40;Game Interrupted !!!
+41;Language :
+42;Delay :
+43;Spreading :
+44;Synchronized
+45;Sequencial
+46;Theme :
+47;Play
+48;Image :

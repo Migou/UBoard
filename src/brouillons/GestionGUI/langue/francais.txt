@@ -1,0 +1,47 @@
+1;Interrompre la partie en cours ?
+2;Oui
+3;Non
+4;Menu Principal
+5;Options
+6;Quitter ?
+7;Nouvelle Partie
+9;Quitter
+10;Retour
+11;Intelligence IA1 :
+12;Intelligence IA2 :
+13;Type IA1 :
+14;AlphaBeta
+15;MiniMax
+16;FailSoft
+17;Type IA2 :
+18;Vitesse des animations :
+19;Rapide
+20;Normale
+21;Lente
+22;Joueur 1 :
+23;Humain
+24;IA
+25;Joueur 2 :
+26;Console :
+27;ON
+28;OFF
+29;Coup invalide !!!
+30;passent leur tour
+31;Les Noirs
+32;Les Blancs
+33;Tour des Noirs
+34;Tour des Blancs
+35;Noirs :
+36;Blancs :
+37;Victoire des Noirs !!!
+38;Match Nul !!!
+39;Victoire des Blancs !!!
+40;Partie Interrompue !!!
+41;Langue :
+42;Delai :
+43;Propagation :
+44;Synchronisee
+45;Sequentielle
+46;Theme :
+47;Jouer
+48;Image :
