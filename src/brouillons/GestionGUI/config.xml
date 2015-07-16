@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+ <!-- Parametrage d'application irrlicht -->
+<antialiazing value="ON" />
+<fullscreen value="OFF" />
+<musicAndFX value="OFF" />
+<realTimeShadows value="OFF" />
+<verticalSynch value="ON" />
+<oldHWBlending value="OFF" />
+<driver value="5" />
+<windowSize width="800" height="600" />
+</config>
