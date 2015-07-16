@@ -20,6 +20,8 @@ git clone https://github.com/Migou/UBoard.git
 
 cd UBoard
 
+git pull # pour récupérer la copier la plus à jour de tous les fichiers
+
 #fichier existant
 
 echo "bonjour" >> README.md
