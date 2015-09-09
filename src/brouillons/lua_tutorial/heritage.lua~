@@ -1,0 +1,102 @@
+--VB : code repompé ici : http://lua-users.org/wiki/InheritanceTutorial
+
+-- Create a new class that inherits from a base class
+-- VB : Crée la classe (une variable en lua) et pas l'instance.
+function inheritsFrom( baseClass )
+
+    -- The following lines are equivalent to the SimpleClass example:
+
+    -- Create the table and metatable representing the class.
+    local new_class = {}
+    local class_mt = { __index = new_class }
+
+    -- Note that this function uses class_mt as an upvalue, so every instance
+    -- of the class will share the same metatable.
+    --
+    function new_class:create()
+        local newinst = {}
+        setmetatable( newinst, class_mt )
+        return newinst
+    end
+
+    -- The following is the key to implementing inheritance:
+
+    -- The __index member of the new class's metatable references the
+    -- base class.  This implies that all methods of the base class will
+    -- be exposed to the sub-class, and that the sub-class can override
+    -- any of these methods.
+    --
+    if baseClass then
+        setmetatable( new_class, { __index = baseClass } )
+    end
+
+    return new_class
+end
+
+--[[ ca doit fonctionner ainsi :
+
+> -- Create a new class that inherits from SimpleClass
+> SubClass = inheritsFrom( SimpleClass )
+>
+> -- override className() function
+> function SubClass:className() print( "SubClass" ) end
+>
+> -- Create an instance of SimpleClass
+> simple = SimpleClass:create()
+> 
+> simple:className()
+SimpleClass
+
+]]--
+
+--class Piece ( de base)
+local Piece = {}
+Piece.__index = Piece
+function Piece:getX() 
+	 local self = setmetatable({}, Piece)
+	 return self.x; 
+end
+function Piece:setX(v) 
+	 local self = setmetatable({}, Piece)
+	 self.x = v; 
+end
+function Piece:getY() 
+	 local self = setmetatable({}, Piece)
+	 return self.y; 
+end
+
+--class Dame
+local Dame = inheritsFrom(Piece)
+function Dame:getRange() return 8; end
+function Dame:movesStraight() return 1; end
+function Dame:movesDiag() return 1; end
+
+d = Dame.create()
+d.setX(4)  --marche pas
+d.y=3  --marche pas
+
+print("dame=",d.movesDiag()) 
+print("dame=",d.getX()) 
+
+
+
+
+--[[
+--class Roi
+local Roi = {}
+Roi.__index = Roi
+Roi.__super = Dame
+function Roi.getRange() return 1; end
+
+--class Tour
+local Tour = {}
+function Tour.movesDiag() return 0; end
+Tour.__super = Dame
+Tour.__index = Tour
+
+
+d=instancier(Dame)
+--print("dame=",d.movesDiag())
+t=instancier(Tour)
+print("tour=",t.movesDiag())
+]]--

@@ -1,3 +1,5 @@
+-- penser à lire cela un jour : http://microlua.xooit.fr/t358-Les-Metatables.htm
+
 local MyClass = {} -- the table representing the class, which will double as the metatable for the instances
 MyClass.__index = MyClass -- failed table lookups on the instances should fallback to the class table, to get methods
 

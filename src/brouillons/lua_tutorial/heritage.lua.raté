@@ -1,0 +1,49 @@
+-- VB : je crée un élement __super dans les classes
+-- On va créer une fonction d'instanciation qui génèrera le modèle de classe qui aglomère toutes les foonctions définies dans chacunes des classes meres.
+
+function instancier(class)
+  if class.__super
+  then
+    FullClass = instancier(class.__super)
+  else
+    FullClass = {} 
+  end
+
+  for key,value in pairs(class) do FullClass.key = value end
+  local instance = {}
+  setmetatable( instance, { __index = FullClass } )
+  return instance
+end
+
+
+--class Piece
+local Piece = {}
+Piece.__index = Piece
+function Piece.getX() return self.x; end
+function Piece.getY() return self.y; end
+
+--class Dame
+local Dame = {}
+Dame.__index = Dame
+Dame.__super = Piece
+function Dame.getRange() return 8; end
+function Dame.movesStraight() return 1; end
+function Dame.movesDiag() return 1; end
+
+--class Roi
+local Roi = {}
+Roi.__index = Roi
+Roi.__super = Dame
+function Roi.getRange() return 1; end
+
+--class Tour
+local Tour = {}
+function Tour.movesDiag() return 0; end
+Tour.__super = Dame
+Tour.__index = Tour
+
+
+d=instancier(Dame)
+--print("dame=",d.movesDiag())
+t=instancier(Tour)
+print("tour=",t.movesDiag())
