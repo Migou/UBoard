@@ -17,27 +17,22 @@ Luacall::Luacall(string luafilename)
 // fonction sans argument
 int Luacall::int_call(string func)
 {
-  lua_getglobal(lua_state, func.c_str());
-  if( lua_pcall(lua_state, 0, 1, 0) != 0)
-  {
-    cout << "impossible de lancer la fonction" << endl;
-    exit(1);
-  }
-  if (!lua_isnumber(lua_state, -1))
-  {
-    cout << "function `"<< func <<"' must return a number" << endl;
-    exit(3);
-  }
-  int retour = lua_tonumber(lua_state, -1);
-  lua_pop(lua_state, 1);  
-  return retour;
+  string argtypes="";
+  return generic_int_call(func,argtypes.c_str());
 }
 
-// fonction sans argument
+// fonction à 1 argument int
 int Luacall::int_call(string func,int a1)
 {
   string argtypes="i";
   return generic_int_call(func,argtypes.c_str(),a1);
+}
+
+// fonction à 1 argument string
+int Luacall::int_call(string func,string a1)
+{
+  string argtypes="s";
+  return generic_int_call(func,argtypes.c_str(),a1.c_str());
 }
 
 // argtypes string composée de "s" et de "i" par exemple pour string et int. cela donne donc "iisi" pour 4 arguments...
@@ -58,15 +53,17 @@ int Luacall::generic_int_call(string func,const char* argtypes,...)
     if( *argtypes == 's')
     {
       char* arg = va_arg(varg, char*);
+      cout << "get string arg=" << arg <<endl;
       lua_pushstring(lua_state,arg); 
     }
     else if(*argtypes == 'i')
     {      
       int arg = va_arg(varg,int);
+      cout << "get int arg=" << arg <<endl;
       lua_pushnumber(lua_state, arg);
     }
     else
-      {
+    {
 	cout << "error in argtype strings : expected types should be either 's' or 'i'" << endl;
 	exit(2);
     }

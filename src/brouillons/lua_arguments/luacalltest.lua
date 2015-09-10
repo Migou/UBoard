@@ -5,3 +5,7 @@ end
 function func_int_fois_deux(v)
 	 return v*2;
 end
+
+function strlen(s)
+	 return s.len();
+end

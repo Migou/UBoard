@@ -14,6 +14,7 @@ public :
   Luacall(string luafilename);
   int int_call(string func);
   int int_call(string func, int arg1);
+  int int_call(string func, string arg1);
   int generic_int_call(string func,const char* argtypes, ...);
   /*  int int_call(char* func, string arg1);
   string string_call(char* func);
