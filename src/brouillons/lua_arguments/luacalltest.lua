@@ -7,5 +7,5 @@ function func_int_fois_deux(v)
 end
 
 function strlen(s)
-	 return s.len();
+	 return string.len(s);
 end
