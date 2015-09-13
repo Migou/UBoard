@@ -9,3 +9,7 @@ end
 function strlen(s)
 	 return string.len(s);
 end
+
+function defaultstring()
+	 return "Je suis une loutre!";
+end

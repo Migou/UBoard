@@ -14,5 +14,7 @@ int main(int argc, char** argv){
   string s = "Bonjour";
   int res3 = lc.int_call("strlen",s);
   cout << "longueur(" <<s<<")="<< res3 << endl;
-  
+
+  string res4 = lc.string_call("defaultstring");
+  cout << ""<< res4 << endl;
 }

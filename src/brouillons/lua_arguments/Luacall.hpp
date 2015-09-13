@@ -16,10 +16,12 @@ public :
   int int_call(string func, int arg1);
   int int_call(string func, string arg1);
   int generic_int_call(string func,const char* argtypes, ...);
-  /*  int int_call(char* func, string arg1);
-  string string_call(char* func);
-  string string_call(char* func, int arg1);
-  string string_call(char* func, string arg1);
+
+  string generic_string_call(string func,const char* argtypes, ...);   
+  string string_call(string func);
+  /*
+  string string_call(string func, int arg1);
+  string string_call(string func, string arg1);
   */
 
 private :
