@@ -74,7 +74,7 @@ int Luacall::generic_int_call(string func,const char* argtypes,...)
 
   if( lua_pcall(lua_state, nbargs, 1, 0) != 0)
   {
-    cout << "impossible de lancer la fonction" << endl;
+    cout << "impossible de lancer la fonction \"" << func << "\" : " << lua_tostring(lua_state, -1) <<endl;
     exit(1);
   }
   if (!lua_isnumber(lua_state, -1))
