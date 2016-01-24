@@ -1,37 +1,28 @@
 DEBUGOPT=-g
 
-mew:
-	miaou
+mew: 
+	./miaou
 
-utils.o : mew utils.cpp utils.hh
-	g++ ${DEBUGOPT} -Wall -c utils.cpp -o utils.o
+utils.o : utils.cpp
+	g++ ${DEBUGOPT} -c utils.cpp
 
-IA.o : mew IA.cpp IA.hh
-	g++ ${DEBUGOPT} -Wall -c IA.cpp -o IA.o
+State.o: State.cpp State.hh
+	g++ ${DEBUGOPT} -c State.cpp
 
-Grid.o : mew Grid.hh
-	g++ ${DEBUGOPT} -Wall -c Grid.cpp -o Grid.o
+Coup.o:
+	g++ ${DEBUGOPT} -c Coup.cpp
 
-LogicalBoard.o : mew LogicalBoard.hh LogicalBoard.cpp
-	g++ ${DEBUGOPT} -Wall -c LogicalBoard.cpp -o LogicalBoard.o
+ia.o : ia.cpp
+	g++ ${DEBUGOPT} -c ia.cpp
 
-Player.o : mew Player.hh Player.cpp
-	g++ ${DEBUGOPT} -Wall -c Player.cpp -o Player.o
-HumanPlayer.o : mew Player.hh Player.cpp
-	g++ ${DEBUGOPT} -Wall -c HumanPlayer.cpp -o HumanPlayer.o
+ia_utest.o: mew ia_utest.cpp 
+	g++ ${DEBUGOPT} -c -Wall ia_utest.cpp -o ia_utest.o
 
+ia_utest: mew ia_utest.o utils.o ia.o 
+	g++ ${DEBUGOPT} -Wall -Wextra ia_utest.o ia.o utils.o -o a.out
 
-ActionAllumettes.o : mew ActionAllumettes.cpp ActionAllumettes.hh
-	g++ ${DEBUGOPT} -Wall -c ActionAllumettes.cpp -o ActionAllumettes.o
+ia_coup_test.o: ia_coup_test.cpp
+	g++ ${DEBUGOPT} -c -Wall ia_coup_test.cpp -o ia_coup_test.o
 
-Coup.o : mew Coup.cpp Coup.hh
-	g++ ${DEBUGOPT} -Wall -c Coup.cpp -o Coup.o
-
-State.o : mew State.cpp State.hh
-	g++ ${DEBUGOPT} -Wall -c State.cpp -o State.o
-
-test : mew State.o Coup.o utils.o test.cpp
-	g++ ${DEBUGOPT} -Wall test.cpp State.o Coup.o utils.o -o test
-
-ia_coup_test : mew ia_coup_test.cpp LogicalBoard.o Grid.o utils.o IA.o Player.o ActionAllumettes.o Coup.o State.o HumanPlayer.o 
-	g++ ${DEBUGOPT} -Wall ia_coup_test.cpp utils.o IA.o Player.o ActionAllumettes.o Coup.o State.o HumanPlayer.o Grid.o LogicalBoard.o -o ia_coup_test
+ia_coup_test: mew ia_coup_test.o utils.o ia.o Coup.o
+	g++ ${DEBUGOPT} -Wall -Wextra ia_coup_test.o ia.o utils.o Coup.o -o a.out
