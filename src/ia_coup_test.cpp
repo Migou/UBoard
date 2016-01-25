@@ -21,7 +21,7 @@ int main()
 {
   State etat;  
   etat.createIAPlayer("IA-Hvé");
-  etat.createHumanPlayer("Vincent");
+  etat.createHumanPlayer("Xavier");
 
    while(! etat.getGagnant() && ! etat.partieNulle() )
    {
@@ -38,7 +38,12 @@ int main()
       cout << "   ... il reste " << etat.getNbAllumettes() << " allumettes"<<endl;
    }
 
-   cout << "Le gagnant est : "<< etat.getIdGagnant() << endl;
+   Player* gagnant = etat.getGagnant();
+   cout << "Le gagnant est : "<< gagnant->toString() << endl;
+   if(gagnant->estHumain() > 0)
+   {
+     cout << "Félicitations "<< gagnant->getName() <<"!"<< endl;
+   }
 
  return 1;
 }
