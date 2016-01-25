@@ -2,6 +2,7 @@
 #define __VB_STATE_
 
 #include "constants.hh"
+#include "LogicalBoard.hh"
 #include <vector>
 #include <string>
 #include "Player.hh"
@@ -19,7 +20,8 @@ class State
 private :
   //vector<LogicalBoard> logicalBoardList;
   //vector<Piece> piecesList;
-  int nballumettes; // pour le test
+  //int nballumettes; // pour le test
+  vector<LogicalBoard*>* plateaux;
   // Player* p_joueur;  // le joueur en cours : à remplacer par le numero d'ordre du joueur
   vector<Player*> playerList;
   int idJoueurCourant; // le joueur dont c'est le tour. Son numero d'ordre dans le tableaprécédent

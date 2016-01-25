@@ -10,6 +10,7 @@ class IA : Player
  public:
   IA(string nom,int id);
   Coup getCoup(State etat);
+  int estHumain();
 };
 
 #else

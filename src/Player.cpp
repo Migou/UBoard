@@ -15,3 +15,8 @@ string Player::toString()
 {
   return my_int_to_string(this->id) + "_" + this->nom;
 }
+
+string Player::getName()
+{
+  return this->nom;
+}

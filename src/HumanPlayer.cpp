@@ -9,6 +9,8 @@ HumanPlayer::HumanPlayer(string n,int i) : Player(n,i)
 {
 }
 
+int HumanPlayer::estHumain(){ return 1; }
+
 Coup HumanPlayer::getCoup(State)
 {
   cout << "Saisissez votre choix de coup 1-3 : ";

@@ -13,7 +13,9 @@ class Player
  public:
   Player(string nom,int id);
   virtual Coup getCoup(State s)=0; // virtual!!! mais ca compile pas. for human players, this function will wait for the user's (gui) action.
+  virtual int estHumain()=0; // for fun 1=oui, 0=non (-1=undef EG : network player?)
   string toString();
+  string getName();
 
   // for IA players, will launch the artificial intelligence.
   // Migou : WtF does it mean?

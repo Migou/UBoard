@@ -10,6 +10,7 @@ class HumanPlayer : Player
  public:
   HumanPlayer(string nom,int id);
   Coup getCoup(State etat);
+  int estHumain();
 };
 
 #else

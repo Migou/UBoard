@@ -17,7 +17,6 @@ long min(long a, long b){ return a<b ? a : b; }
 long max(long a, long b){ return a>b ? a : b; }
 
 
-
 // source : http://www.di.ens.fr/~granboul/enseignement/mmfai/algo2003-2004/tp5/
 // est_min : indique si le but est de minimiser ou maximiser le score : normalement, lorsque c'est le tour du joueur on maximise, lorsque c'est le tour de l'adversaire, on minimise
 // p_joueur => la personne pour qui on doit choisir le coup. Influence la notation du cas "feuille" = quand le jeu est fini
@@ -122,6 +121,8 @@ long alpha_beta(State* P,long A,long B,bool est_min,int id_joueur,int prof,Coup*
 IA::IA(string n,int i) : Player(n,i)
 {
 }
+
+int IA::estHumain(){ return 0; }
 
 
 Coup IA::getCoup(State state)
