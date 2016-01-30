@@ -1,0 +1,35 @@
+
+-- Définition du jeu des allumettes
+
+Definition{
+Nbjoueurs : 2
+Pallumettes : Piece { valeur [0-14] = 14 }
+
+-- tile -- a priori pas besoin de plateau mais sinon ca serait une case unique
+}
+
+Initialisation{
+
+piece(Pallumettes) -- piece1, placée sur un plateau à 0 dimension (tile1), généré par défaut en l'absence de plataeu déclaré.
+
+}
+
+--priorite1:
+Coups Possibles{
+
+
+  if piece1.valeur > 0 then ChangementEtat(piece1,valeur,piece1.valeur-1) -- changementEtat( piece, attribut, valeur )
+  if piece1.valeur > 1 then ChangementEtat(piece1,valeur,piece1.valeur-2)
+  if piece1.valeur > 2 then ChangementEtat(piece1,valeur,piece1.valeur-3)
+
+}
+
+Victoire {
+  -- s'exécute après le coup
+  context newstate:
+	 if piece1.valeur = 0 then Defaite()
+}
+
+IA-evaluation {
+0 -- chaque valeur indiquée est sommée en retournée en fin de fonction
+}
