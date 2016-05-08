@@ -64,7 +64,15 @@ function Action.newAjout(typePiece,emplacement)
    return self
 end
 
- 
+function Action.newChangementEtat(piece,stringAttr,valeur)
+   local self = setmetatable({}, Action)
+   self.type = "prise"
+   self.piece = piece
+   self.attr = stringAttr
+   self.val = valeur
+   return self
+end
+  
 
 
 
@@ -121,6 +129,18 @@ function Prise( cible ,  ) // todo voir comment on code en lua des arguments fac
    ....
 end
 
+function ChangementEtat(piece,attr,val) -- ? attr, 'attr'
+  action = Action.newChangementEtat(piece,attr,val) 
+
+  // verification de la variable globale curListeAction
+  if curListeAction == nil then
+     coup = {}
+     table.insert(coup,action)
+     table.insert(listeCoups,coup)
+  else
+     table.insert(curListeAction,action)
+  end
+end 
 
 
 

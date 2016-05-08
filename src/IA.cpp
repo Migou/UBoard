@@ -58,16 +58,19 @@ long alpha_beta(State* P,long A,long B,bool est_min,int id_joueur,int prof,Coup*
       //pour tout fils Pi de P faire
       vector<Coup*> listeCoupsPossibles = P->getCoupsPossibles();
       int nbcoups = listeCoupsPossibles.size();
+      if(nbcoups == 0){ die("cas non prévu : 0 coups possibles"); }
+
       for (int i =0; i<nbcoups; i++ )
       {
 	Coup* pc = listeCoupsPossibles[i];
 	cout << prefix << "TEST du coup n°" << i << " (" << pc->toString() <<")"<<endl;
-	State Pi(*P,*pc); // c'est la version 1, où on instancie un nouvel état à chaque fois, parce que c'est la version prototype, mais après il vaudrait mieux exécuter le coup avant l'apper de fonction et le défaire à la sortie
-	//version 2 : P->update(c);
+
+	P->update(*pc); // on modifie l'état, il faudra penser à démodifier à la sotie du programme
+
         //Val = ALPHA-BETA(Pi, A, Min(B,Beta de P))
-	long val = alpha_beta(&Pi,A,min(B,Beta),!est_min,id_joueur,prof+1,(Coup*)0); // le cast c'est juste pour se rapperkle ce que c'est que cet argument;
+	long val = alpha_beta(P,A,min(B,Beta),!est_min,id_joueur,prof+1,(Coup*)0); // le cast c'est juste pour se rapperkle ce que c'est que cet argument;
     
-	//version 2 : P->rollbackCoup(c);
+	P->rollback(); // la mémorisation de ce qui doit être défait est à la charge de la classe état.
 	  
 	//Beta de P = Min(Beta de P, Val)
 	Beta = min(Beta,val);
@@ -88,15 +91,19 @@ long alpha_beta(State* P,long A,long B,bool est_min,int id_joueur,int prof,Coup*
       //pour tout fils Pi de P faire
       vector<Coup*> listeCoupsPossibles = P->getCoupsPossibles();
       int nbcoups = listeCoupsPossibles.size();
+      if(nbcoups == 0){ die("cas non prévu-2 : 0 coups possibles"); }
+
       for (int i =0; i<nbcoups; i++ )
       {
 	Coup* pc = listeCoupsPossibles[i];
 	cout << prefix << "TEST du coup n°" << i << " (" << pc->toString() <<")"<<endl;
-	State Pi(*P,*pc); // c'est la version 1, où on instancie un nouvel état à chaque fois, parce que c'est la version prototype, mais après il vaudrait mieux exécuter le coup avant l'apper de fonction et le défaire à la sortie
-	//version 2 : P->update(c);
+	
+	P->update(*pc); 
+
 	//Val = ALPHA-BETA(Pi, Max(A,Alpha de P), B)
-	long val = alpha_beta(&Pi,max(A,Alpha),B,!est_min,id_joueur,prof+1,(Coup*)0);
-	//version 2 : P->rollbackCoup(c);
+	long val = alpha_beta(P,max(A,Alpha),B,!est_min,id_joueur,prof+1,(Coup*)0);
+
+	P->rollback();
 
 	if(val  > meilleur_val ){ meilleur_i = i; meilleur_val = val; }
  

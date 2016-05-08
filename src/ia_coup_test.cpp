@@ -17,11 +17,15 @@
 
 using namespace std;
 
+
+
 int main()
 {
-  State etat;  
+  State etat("./lib/lua/exemple.lua");  
   etat.createIAPlayer("IA-Hvé");
   etat.createHumanPlayer("Xavier");
+  //etat.getJoueurActif()->toString();
+  //exit(1);
 
    while(! etat.getGagnant() && ! etat.partieNulle() )
    {
@@ -32,11 +36,12 @@ int main()
      
      cout << "joueur " <<  etat.getJoueurActif()->toString() << " PREND " << c.toString() << " ALLUMETTES"<<endl;
 
-      State etat2(etat,c);
-      etat.clone(etat2);
+     etat.update(c);
 
-      cout << "   ... il reste " << etat.getNbAllumettes() << " allumettes"<<endl;
+      cout << "   ... il reste " << etat.getNbAllumettes() << " allumettes"<<endl;   
    }
+
+   cout << "Partie Terminée." << endl;
 
    Player* gagnant = etat.getGagnant();
    cout << "Le gagnant est : "<< gagnant->toString() << endl;
