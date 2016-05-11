@@ -179,17 +179,9 @@ vector<Coup*> State::getCoupsPossibles()
 {
 
   int nballumettes = (*this->plateaux)[0]->getContent(new vector<int>());
-  cout << " | State::getCoupsPossibles("<< nballumettes <<")"<<endl;
-  
+ 
   vector<Coup*> coups = lc->coupvector_call("CoupsPossibles",nballumettes);
 
-  //  for(int i = 1; i <= (int)coups->size(); i++ ){
-  //  cout << "recu nombre "<<(*coups)[i]<<endl;
-  //  Coup* c = new Coup( (*coups)[i] );
-  //  cout << "créé coup "<<c->toString()<<endl;
-  //  res.push_back(c);
-  //}
-  cout << "fin du test" << endl;
   return coups;
 }
 
@@ -282,3 +274,15 @@ long State::evaluerEtat(int id_player){
   return 0; // il n'y a pas d'avantage particulier a avoir beaucoup d'allumettes => aucune heuristique particulière, faut juste éviter de perdre.
 // on sait qu'il faut laisse à son adversaire 1, 5, 9, 11... etc allumettes, mais c'est justement le but du test de vérifier que le minmax reproduit bien ce comportement.
 }
+string State::toString()
+{
+  string res="";
+  for(  unsigned int numplateau = 0; numplateau < this->plateaux->size(); numplateau++ )
+  {
+    LogicalBoard plateau =  (*this->plateaux)[0];
+    res = res + "P" + (numplateau<10 ? " " : "") + my_int_to_string(numplateau) + " " + plateau.toString();
+
+  }
+  return res;
+}
+

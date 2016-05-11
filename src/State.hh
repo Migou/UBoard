@@ -61,6 +61,7 @@ public:
   //  State getNewState4nectTurn(); // TODO : à ajouter à l'architecture? crée un état vierge avec juste le joueur actif suivant
   int getNbAllumettes();
   void setNbAllumettes(int i);
+  string toString();
 
 };
 

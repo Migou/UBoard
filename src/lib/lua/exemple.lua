@@ -77,12 +77,12 @@ end
 
 function Action.newChangementEtat(piece,stringAttr,valeur)
    local self = setmetatable({}, Action)
-print("yo")
+
    self.type = "changementEtat"
    self.piece = piece
    self.attr = stringAttr
    self.val = valeur
-print("yi")
+
    return self
 end
   
@@ -139,11 +139,7 @@ end
 
 
 function ChangementEtat(piece,attr,val) 
-  print("aaa");
-  print("attr="..attr..",val="..val);
   action = Action.newChangementEtat(piece,attr,val) 
-  print("yu")
-
 
   -- verification de la variable globale curListeAction
   if curListeAction == nil then
@@ -152,13 +148,8 @@ function ChangementEtat(piece,attr,val)
      table.insert(coup,action) 
      table.insert(listeCoups,coup)
      -- version liaison directe C++
-print("yv cpp_add_coup("..p_coupvector..")")
- 
      cpp_add_coup(p_coupvector)
-     print("yw add_action("..p_coupvector..","..typeActionAllumettes..","..val)
      cpp_add_action(p_coupvector,typeActionAllumettes,val) -- en attendant une gestion plus générique du modèle avec un ChangementEtat(piece,attr,val) transmis à C++
-print("yx")
-
   else
      table.insert(curListeAction,action)
   end
@@ -195,16 +186,15 @@ piece1 = Pallumettes.new() --default board as none is declared
 tile1.add(piece1) -- default destination
 
 function CoupsPossibles(pv,nballumettes)
+print("recu l'entier"..nballumettes)
 	 -- on la stocke dans une variable globale
 	 p_coupvector = pv 
-	 --print("start pointeur="..pv);
 	-- if piece1.valeur > 0 then ChangementEtat(piece1,"valeur",piece1.valeur-1) end
 	   if nballumettes > 0 then ChangementEtat(piece1,"valeur",1) end		
 	-- if piece1.valeur > 1 then ChangementEtat(piece1,"valeur",piece1.valeur-2) end
 	   if nballumettes > 1 then ChangementEtat(piece1,"valeur",2) end
 	 -- if piece1.valeur > 2 then ChangementEtat(piece1,"valeur",valeur-3) end
 	   if nballumettes > 2 then ChangementEtat(piece1,"valeur",3) end
-print("end");
 
 end
 

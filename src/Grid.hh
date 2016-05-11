@@ -15,6 +15,7 @@ public:
   virtual void set(vector<int>*,typedonnees valeur)=0;
   virtual typedonnees get(vector<int>*)=0;
   virtual Grid* getClone()=0;
+  virtual string toString()=0; 
 };
 
 class Grid0D : Grid
@@ -25,6 +26,7 @@ public:
   void set(vector<int>*,typedonnees valeur);
   typedonnees get(vector<int>*);
   Grid* getClone();
+  string toString(); 
 };
 
 class Grid1D : Grid
@@ -35,6 +37,7 @@ public:
   void set(vector<int>*,typedonnees valeur);
   typedonnees get(vector<int>*);
   Grid* getClone();
+  string toString(); 
 };
 
 class Grid2D : Grid
@@ -45,6 +48,7 @@ public:
   void set(vector<int>*,typedonnees valeur);
   typedonnees get(vector<int>*);
   Grid* getClone();
+  string toString(); 
 };
 
 #else

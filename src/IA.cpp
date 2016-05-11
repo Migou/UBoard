@@ -13,8 +13,19 @@ using namespace std;
 #define MAXPROF 64
 #define RETOURMEILLEURCOUP if(prof==0){ (*p_meilleur_coup) = listeCoupsPossibles[meilleur_i]; }
 
+
 long min(long a, long b){ return a<b ? a : b; }
 long max(long a, long b){ return a>b ? a : b; }
+
+void print_coups_possibles(vector<Coup*>* coups){
+  cout << "(";
+  for(unsigned int i=0; i< coups->size(); i++)
+  {
+    Coup* coup = (*coups)[i];
+    cout << coup->toString() << " ";
+  }
+  cout<<")"<<endl;
+}
 
 
 // source : http://www.di.ens.fr/~granboul/enseignement/mmfai/algo2003-2004/tp5/
@@ -29,7 +40,7 @@ long alpha_beta(State* P,long A,long B,bool est_min,int id_joueur,int prof,Coup*
   // prefixe
   for(int i=0; i<prof; i++){ prefix = prefix + ". "; }
 
-  cout<< prefix << "alphaBeta(prof="<< prof <<"):" <<endl;
+  cout<< prefix << "alphaBeta(prof="<< prof <<"): " << P->toString() <<endl;
 
 //fonction ALPHA-BETA(P, A, B) /* ici A est toujours inférieur à B */
   if(A > B){ die("erreur fatale : A doit être inférieur à B"); }
@@ -57,6 +68,8 @@ long alpha_beta(State* P,long A,long B,bool est_min,int id_joueur,int prof,Coup*
     {
       //pour tout fils Pi de P faire
       vector<Coup*> listeCoupsPossibles = P->getCoupsPossibles();
+      cout << prefix << "coups possibles = ";
+      print_coups_possibles(&listeCoupsPossibles);
       int nbcoups = listeCoupsPossibles.size();
       if(nbcoups == 0){ die("cas non prévu : 0 coups possibles"); }
 
@@ -65,13 +78,17 @@ long alpha_beta(State* P,long A,long B,bool est_min,int id_joueur,int prof,Coup*
 	Coup* pc = listeCoupsPossibles[i];
 	cout << prefix << "TEST du coup n°" << i << " (" << pc->toString() <<")"<<endl;
 
+	PRINTVECTPREFIX_toString(listeCoupsPossibles,"e");
 	P->update(*pc); // on modifie l'état, il faudra penser à démodifier à la sotie du programme
+	PRINTVECTPREFIX_toString(listeCoupsPossibles,"f");
 
         //Val = ALPHA-BETA(Pi, A, Min(B,Beta de P))
 	long val = alpha_beta(P,A,min(B,Beta),!est_min,id_joueur,prof+1,(Coup*)0); // le cast c'est juste pour se rapperkle ce que c'est que cet argument;
-    
+    	PRINTVECTPREFIX_toString(listeCoupsPossibles,"g");
+
 	P->rollback(); // la mémorisation de ce qui doit être défait est à la charge de la classe état.
-	  
+	PRINTVECTPREFIX_toString(listeCoupsPossibles,"h");
+
 	//Beta de P = Min(Beta de P, Val)
 	Beta = min(Beta,val);
 
@@ -90,6 +107,9 @@ long alpha_beta(State* P,long A,long B,bool est_min,int id_joueur,int prof,Coup*
     {
       //pour tout fils Pi de P faire
       vector<Coup*> listeCoupsPossibles = P->getCoupsPossibles();
+      cout << prefix << "coups possibles2 = ";
+      print_coups_possibles(&listeCoupsPossibles);
+
       int nbcoups = listeCoupsPossibles.size();
       if(nbcoups == 0){ die("cas non prévu-2 : 0 coups possibles"); }
 
@@ -97,13 +117,14 @@ long alpha_beta(State* P,long A,long B,bool est_min,int id_joueur,int prof,Coup*
       {
 	Coup* pc = listeCoupsPossibles[i];
 	cout << prefix << "TEST du coup n°" << i << " (" << pc->toString() <<")"<<endl;
-	
+	PRINTVECTPREFIX_toString(listeCoupsPossibles,"a");
 	P->update(*pc); 
-
+	PRINTVECTPREFIX_toString(listeCoupsPossibles,"b");
 	//Val = ALPHA-BETA(Pi, Max(A,Alpha de P), B)
 	long val = alpha_beta(P,max(A,Alpha),B,!est_min,id_joueur,prof+1,(Coup*)0);
-
+	PRINTVECTPREFIX_toString(listeCoupsPossibles,"c");
 	P->rollback();
+	PRINTVECTPREFIX_toString(listeCoupsPossibles,"d");
 
 	if(val  > meilleur_val ){ meilleur_i = i; meilleur_val = val; }
  

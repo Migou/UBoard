@@ -1,4 +1,5 @@
 #include "Grid.hh"
+#include "utils.hh" // my_int_to_stringusing namespace std;
 
 
 void Grid0D::set(vector<int>* coords,typedonnees valeur){
@@ -18,6 +19,11 @@ Grid* Grid0D::getClone(){
   clone->set(dummy,this->get(dummy));
   return clone;
 }
+
+string Grid0D::toString()
+{
+  return "0D grid="+ my_int_to_string(this->donnee);
+} 
 
 
 void Grid1D::set(vector<int>* coords,typedonnees valeur)
@@ -42,6 +48,17 @@ Grid* Grid1D::getClone(){
 
   return clone;
 }
+
+string Grid1D::toString()
+{
+  string res =  "[";
+  for(int i = 0; i < (int)this->donnees.size(); i++)
+  {
+    res = res + my_int_to_string(this->donnees[i]) + " ";
+  }
+  return res + "]";
+} 
+
 
 void Grid2D::set(vector<int>* coords,typedonnees valeur){
   if(coords->size() != 2){ die("dimension incorrecte, 1 attendu"); }
@@ -69,3 +86,19 @@ Grid* Grid2D::getClone(){
 
   return clone;
 }
+
+string Grid2D::toString()
+{
+  string res =  "[";
+
+  for(int i = 0; i < (int)this->donnees.size(); i++)
+    {
+      for(int j = 0; i < (int)this->donnees[i].size(); j++)
+	{
+	  res = res + my_int_to_string(this->donnees[i][j]) + " ";
+	}
+      res = res + "]\n";
+      
+    }
+  return res ;
+} 

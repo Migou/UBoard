@@ -75,3 +75,7 @@ void  LogicalBoard::setContent(vector<int>* coordonnees,typedonnees valeur){
    this->datagrid->set(coordonnees,valeur); // :-) et c'est là qu'on apprécie la classe virtuelle Grid, qui permet d'homogénéiser le traitement!!!
 }
 
+string LogicalBoard::toString()
+{
+  return this->datagrid->toString();
+}

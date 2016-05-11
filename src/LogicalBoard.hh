@@ -30,6 +30,7 @@ class LogicalBoard {
   struct _dimensionInfo getDimensionInfo(int numDimension);
   typedonnees getContent(vector<int>* coordonnees);
   void setContent(vector<int>* coordonnees,typedonnees valeur);
+  string toString();
 };
 
 #else
