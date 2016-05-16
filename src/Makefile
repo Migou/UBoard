@@ -38,8 +38,8 @@ LuaCall.o: LuaCall.cpp
 test : mew State.o Coup.o utils.o test.cpp
 	g++ ${DEBUGOPT} -Wall test.cpp State.o Coup.o utils.o -o test
 
-LuaCall-test : LuaCall-test.cpp LuaCall.o
-	g++ ${DEBUGOPT} ${LUAOPTS} -Wall ./LuaCall-test.cpp LuaCall.o -o LuaCall-test
+LuaCall-test : LuaCall-test.cpp LuaCall.o Coup.o utils.o ActionAllumettes.o State.o LogicalBoard.o Grid.o IA.o Player.o HumanPlayer.o
+	g++ ${DEBUGOPT} ${LUAOPTS} -Wall ./LuaCall-test.cpp LuaCall.o Coup.o utils.o ActionAllumettes.o State.o LogicalBoard.o Grid.o IA.o Player.o HumanPlayer.o -o LuaCall-test
 
 ia_coup_test : mew ia_coup_test.cpp LuaCall.o LogicalBoard.o Grid.o utils.o IA.o Player.o ActionAllumettes.o Coup.o State.o HumanPlayer.o
 	g++ ${DEBUGOPT} ${LUAOPTS} -Wall ia_coup_test.cpp utils.o IA.o Player.o ActionAllumettes.o Coup.o State.o HumanPlayer.o Grid.o LogicalBoard.o LuaCall.o -o ia_coup_test

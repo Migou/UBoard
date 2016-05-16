@@ -1,6 +1,7 @@
 #include "LuaCall.hh"
 #include "utils.h" // fonction die
 #include "Action.hh"
+#include "Coup.hh"
 
 /***********************************
  * Implémentation de LuaCall.hh utilsiant Lua 5.2
