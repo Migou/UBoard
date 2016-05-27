@@ -1,15 +1,13 @@
 #include <stdlib.h> //exit
 #include <iostream>
 #include <vector>
+#include <climits>
 #include "IA.hh"
 #include "utils.hh"
 using namespace std;
 
-// pas sur que ca soit précisément les bonnes valeusr mais pas loin.
-#define MAXLONG 9223372036854775807 
-#define MINLONG -9223372036854775806
-#define INFINITY MAXLONG
-#define MINUSINFINITY MINLONG
+#define INFINITY LONG_MAX
+#define MINUSINFINITY LONG_MIN
 #define MAXPROF 64
 #define RETOURMEILLEURCOUP if(prof==0){ (*p_meilleur_coup) = listeCoupsPossibles[meilleur_i]; }
 
