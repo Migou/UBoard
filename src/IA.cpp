@@ -128,10 +128,10 @@ long alpha_beta(State* P,long A,long B,bool est_min,int id_joueur,int prof,Coup*
  
         Alpha = max(Alpha, val);
 	//Si Alpha de P >= B /*ceci est la coupure beta */
-	if(Alpha >= B)
+	if(Alpha >= B && prof > 0)
 	{
 	  //alors retourner Alpha de P
-	  if(prof==0){ *p_meilleur_coup = *(listeCoupsPossibles[meilleur_i]); } //RETOURMEILLEURCOUP par copie
+	  //if(prof==0){ *p_meilleur_coup = *(listeCoupsPossibles[meilleur_i]); } //RETOURMEILLEURCOUP par copie
 
 	    return Alpha;
 	}
